@@ -20,9 +20,15 @@ function Bytes2HexString(arrBytes) {
 
 Java.perform(function () {
     var tt1 = Java.use("com.ss.sys.ces.gg.tt$1");
-
-
     tt1.a.implementation = function (s1, m1) {
+
+        // var ThreadDef = Java.use('java.lang.Thread');
+        // var ThreadObj = ThreadDef.$new();
+        // var stack = ThreadObj.currentThread().getStackTrace();
+        // for (var i = 0; i < stack.length; i++) {
+        //     console.log(i + " => " + stack[i].toString());
+        // }
+
         //console.log("url:", s1);
         //console.log("map:", m1);
         var ret = this.a(s1, m1);
@@ -31,7 +37,7 @@ Java.perform(function () {
     }
 
 
-    var cesa = Java.use("com.ss.sys.ces.a");
+    //var cesa = Java.use("com.ss.sys.ces.a");
     /*
     cesa.meta.overload("int", "android.content.Context", "java.lang.Object").implementation = function (i, context, obj) {
         console.log("meta ok");
