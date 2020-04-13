@@ -17,40 +17,69 @@ function Bytes2HexString(arrBytes) {
     return str;
 }
 
+//查看类的所有方法和属性
+function outDescJavaClass(className) {
+    var jClass = Java.use(className);
+    console.log(JSON.stringify({
+        _name: className,
+        _methods: Object.getOwnPropertyNames(jClass.__proto__).filter(function (m) {
+            return !m.startsWith('$') // filter out Frida related special properties
+                || m == 'class' || m == 'constructor' // optional
+        }),
+        _fields: jClass.class.getFields().map(function (f) {
+            return f.toString()
+        })
+    }, null, 2));
+}
 
 Java.perform(function () {
-    var tt1 = Java.use("com.ss.sys.ces.gg.tt$1");
-    tt1.a.implementation = function (s1, m1) {
 
-        // var ThreadDef = Java.use('java.lang.Thread');
-        // var ThreadObj = ThreadDef.$new();
-        // var stack = ThreadObj.currentThread().getStackTrace();
-        // for (var i = 0; i < stack.length; i++) {
-        //     console.log(i + " => " + stack[i].toString());
-        // }
+    //设备注册 applog发送时调用
+    var netUtil = Java.use("com.ss.android.common.applog.NetUtil");
+    console.log(netUtil.__proto__)
+    netUtil.sendEncryptLog.implementation = function (str, bArr, context, z) {
+        console.log("sendEncryptLog ok");
 
-        //console.log("url:", s1);
-        //console.log("map:", m1);
-        var ret = this.a(s1, m1);
-        //console.log("ret:", ret);
-        return ret;
-    }
-
-
-    //var cesa = Java.use("com.ss.sys.ces.a");
-    /*
-    cesa.meta.overload("int", "android.content.Context", "java.lang.Object").implementation = function (i, context, obj) {
-        console.log("meta ok");
-        console.log("i:", i);
+        console.log("str:", str);
 
         var arr = Java.use("java.lang.String")
-        console.log("meta obj:" + arr.$new(obj).toString());
+        console.log("sendEncryptLog sendEncryptLog:" + arr.$new(bArr).toString());
 
-        var result = this.meta(i, context, obj);
-        console.log("meta ok," + result);
+        var result = this.sendEncryptLog(str, bArr, context, z);
+        console.log("sendEncryptLog ok," + result);
         return result
     }
-*/
+
+
+    // var tt1 = Java.use("com.ss.sys.ces.gg.tt$1");
+    // tt1.a.implementation = function (s1, m1) {
+    //
+    //     // var ThreadDef = Java.use('java.lang.Thread');
+    //     // var ThreadObj = ThreadDef.$new();
+    //     // var stack = ThreadObj.currentThread().getStackTrace();
+    //     // for (var i = 0; i < stack.length; i++) {
+    //     //     console.log(i + " => " + stack[i].toString());
+    //     // }
+    //
+    //     console.log("url:", s1);
+    //     console.log("map:", m1);
+    //     var ret = this.a(s1, m1);
+    //     console.log("ret:", ret);
+    //     return ret;
+    // }
+    //
+    // var cesa = Java.use("com.ss.sys.ces.a");
+    // cesa.meta.overload("int", "android.content.Context", "java.lang.Object").implementation = function (i, context, obj) {
+    //     console.log("meta ok");
+    //     console.log("i:", i);
+    //
+    //     var arr = Java.use("java.lang.String")
+    //     console.log("meta obj:" + arr.$new(obj).toString());
+    //
+    //     var result = this.meta(i, context, obj);
+    //     console.log("meta ok," + result);
+    //     return result
+    // }
     // cesa.leviathan.overload("int", "int", "[B").implementation = function (i, i1, obj) {
     //     console.log("leviathan ok");
     //     console.log("i:", i, "i1:", i1);
@@ -64,6 +93,8 @@ Java.perform(function () {
     //     console.log("leviathan ok," + Bytes2HexString(result));
     //     return result
     // }
+
+
 });
 
 rpc.exports = {
