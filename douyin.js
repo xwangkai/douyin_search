@@ -36,17 +36,17 @@ Java.perform(function () {
 
     //设备注册 applog发送时调用
     var netUtil = Java.use("com.ss.android.common.applog.NetUtil");
-    console.log(netUtil.__proto__)
+    //console.log(netUtil.__proto__)
     netUtil.sendEncryptLog.implementation = function (str, bArr, context, z) {
         console.log("sendEncryptLog ok");
 
         console.log("str:", str);
-
+        //console.log("bArr:", bArr);
         var arr = Java.use("java.lang.String")
         console.log("sendEncryptLog sendEncryptLog:" + arr.$new(bArr).toString());
 
         var result = this.sendEncryptLog(str, bArr, context, z);
-        console.log("sendEncryptLog ok," + result);
+       // console.log("sendEncryptLog ok," + result);
         return result
     }
 
@@ -67,7 +67,7 @@ Java.perform(function () {
     //     console.log("ret:", ret);
     //     return ret;
     // }
-    //
+
     // var cesa = Java.use("com.ss.sys.ces.a");
     // cesa.meta.overload("int", "android.content.Context", "java.lang.Object").implementation = function (i, context, obj) {
     //     console.log("meta ok");
@@ -83,6 +83,8 @@ Java.perform(function () {
     // cesa.leviathan.overload("int", "int", "[B").implementation = function (i, i1, obj) {
     //     console.log("leviathan ok");
     //     console.log("i:", i, "i1:", i1);
+    //     //console.log("sMetaData:", cesa.sMetaData.value);
+    //
     //
     //     var arr = Java.use("java.util.Arrays");
     //     console.log("obj:", Bytes2HexString(obj));
@@ -94,6 +96,53 @@ Java.perform(function () {
     //     return result
     // }
 
+    // var keva = Java.use("com.bytedance.keva.KevaMonitor");
+    // console.log("KevaMonitor loadLibrary:", keva);
+    // keva.loadLibrary.overload("java.lang.String").implementation = function (str) {
+    //
+    //     console.log("loadLibrary:", str);
+    //     this.loadLibrary(str);
+    // }
+
+
+    // var cesc = Java.use("com.ss.sys.ces.c");
+    // outDescJavaClass("com.ss.sys.ces.c");
+    //
+    // cesc.a.overload("android.content.Context", "long", "int", "com.ss.sys.ces.out.IExpendFunctions").implementation = function (context, i, j, iExpendFunctions) {
+    //
+    //     console.log("i:", i);
+    //     console.log("j:", j);
+    //     console.log("iExpendFunctions:", iExpendFunctions);
+    //     var ret = this.a(context, i, j, iExpendFunctions);
+    //     console.log("ret:", ret);
+    //     return ret;
+    // }
+
+    // var cesc = Java.use(" com.bytedance.g.a");
+    //
+    // cesc.a.overload("java.lang.String", "java.lang.Boolean", "java.lang.Boolean", "android.content.Context").implementation = function (i, j, k, context) {
+    //     console.log("com.bytedance.g.a ok");
+    //     console.log("i:", i);
+    //     console.log("j:", j);
+    //     console.log("k:", k);
+    //     this.a(i, j, k, context);
+    //
+    // }
+
+
+    // var system = Java.use("java.lang.System");
+    // system.loadLibrary.implementation = function (str) {
+    //
+    //     console.log("loadLibrary:", str);
+    //     this.loadLibrary(str);
+    //
+    // }
+    // system.load.implementation = function (str) {
+    //
+    //     console.log("load:", str);
+    //     this.load(str);
+    //
+    // }
 
 });
 

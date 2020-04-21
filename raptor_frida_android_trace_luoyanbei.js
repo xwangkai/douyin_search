@@ -125,10 +125,10 @@ function traceMethod(targetClassMethod) {
             console.warn(prefixStr + logContent_1);
 
             // print backtrace, 打印调用堆栈
-            // Java.perform(function() {
-            // 	var bt = Java.use("android.util.Log").getStackTraceString(Java.use("java.lang.Exception").$new());
-            // 	console.log(prefixStr +"Backtrace:" + bt);
-            // });
+            Java.perform(function () {
+                var bt = Java.use("android.util.Log").getStackTraceString(Java.use("java.lang.Exception").$new());
+                console.log(prefixStr + "Backtrace:" + bt);
+            });
 
             // print args
             // if (arguments.length) console.log();
@@ -309,7 +309,7 @@ setTimeout(function () { // avoid java.lang.ClassNotFoundException
 
     Java.perform(function () {
 
-        trace("com.ss.android.deviceregister.DeviceRegisterManager");
+        trace("com.ss.sys.ces.c");
         // trace("com.test.flyer.MainActivity.gainAge");
 
         // trace("com.target.utils.CryptoUtils.decrypt");
